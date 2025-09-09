@@ -24,6 +24,17 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
+        <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;700&display=swap"
+          rel="stylesheet"
+        />
+        <style>{`
+          body {
+            font-family: 'Sarabun', sans-serif;
+          }
+        `}</style>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
