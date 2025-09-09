@@ -578,7 +578,7 @@ export default function RepairNotify() {
       </thead>
         <tbody> 
           {data.map((item, index) => (
-            <tr key={item.RepairID} className="text-black text-xs even:bg-white odd:bg-[#ecf0f0]">
+            <tr key={item.RepairID} className="text-black text-xs even:bg-white odd:bg-[#ecf0f0] hover:bg-blue-100">
               <td className="border px-4 py-2 text-center">{index + 1}</td>
               <td className="border px-4 py-2 text-center">{item.RepairNo}</td>
               <td className="border px-4 py-2">{item.DptCode}</td>
