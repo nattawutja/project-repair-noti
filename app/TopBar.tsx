@@ -27,7 +27,7 @@ export default function TopBar() {
   return (
     <div
       className="w-full text-black px-6 py-4 flex items-center justify-between shadow-md"
-      style={{ backgroundColor: "#fec235" }}
+      style={{ backgroundColor: "#e9eef6" }}
     >
       <div className="space-x-4">
        
