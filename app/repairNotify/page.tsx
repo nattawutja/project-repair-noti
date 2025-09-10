@@ -3,6 +3,7 @@ import Image from "next/image";
 import { FaTimes,FaCog,FaPaperPlane,FaSearch,FaFileExport,FaPrint} from 'react-icons/fa';
 import React,{ useState,useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
+import { useRouter } from 'next/navigation';
 
 export default function RepairNotify() {
 
@@ -33,6 +34,7 @@ export default function RepairNotify() {
     status: string;
   };
 
+  const router = useRouter();
   const [showModalAdd, setShowModalAdd] = useState(false);
   const [countData, setShowcountData] = useState(0);
   const [data, setData] = useState<DataNotifyRepair[]>([]);
@@ -143,6 +145,47 @@ export default function RepairNotify() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if(formData.tbDateNoti == ""){
+      alert("กรุณาระบุวันที่แจ้ง");
+      return false;
+    }
+
+    if(formData.tbNameEmp == ""){
+      alert("กรุณาระบุชื่อพนักงาน");
+      return false;
+    }
+
+    if(formData.tbSystemType == ""){
+      alert("กรุณาระบุประเภท");
+      return false;
+    }
+
+    if(formData.tbTool == ""){
+      alert("กรุณาระบุชนิดอุปกรณ์");
+      return false;
+    }
+
+    if(formData.tbToolNumber == ""){
+      alert("กรุณาระบุหมายเลขเครื่อง");
+      return false;
+    }
+
+    if(formData.tbModel == ""){
+      alert("กรุณาระบุรุ่น");
+      return false;
+    }
+    
+    if(formData.tbAssetID == ""){
+      alert("กรุณาระบุรหัสทรัพย์สิน");
+      return false;
+    }
+
+    if(formData.tbDesc == ""){
+      alert("กรุณาระบุรายละเอียด");
+      return false;
+    }
+
     try {
       const response = await fetch("http://localhost:8000/save.php", {
         method: "POST",
@@ -313,6 +356,10 @@ export default function RepairNotify() {
       console.error("เกิดข้อผิดพลาด", error);
     }
 
+  };
+
+  const handleRowClick = (id: number) => {
+    window.open(`/repairNotify/view?id=${id}`, '_blank');
   };
 
   return (
@@ -559,7 +606,7 @@ export default function RepairNotify() {
     </div>
     <table className="table-auto w-full border-collapse border border-gray-300 rounded shadow-md">
       <thead>
-        <tr className=" text-black text-xs " style={{backgroundColor:"#fec235"}}>
+        <tr className=" text-black text-xs " style={{backgroundColor:"#fdd70a82"}}>
           <th className="border px-4 py-2 text-center">ลำดับ</th>
           <th className="border px-4 py-2 text-center">เลขที่เอกสาร</th>
           <th className="border px-4 py-2 text-center">รหัสแผนก</th>
@@ -576,30 +623,30 @@ export default function RepairNotify() {
           <th className="border px-4 py-2 text-center">Print PDF</th>
         </tr>
       </thead>
-        <tbody> 
-          {data.map((item, index) => (
-            <tr key={item.RepairID} className="text-black text-xs even:bg-white odd:bg-[#ecf0f0] hover:bg-blue-100">
-              <td className="border px-4 py-2 text-center">{index + 1}</td>
-              <td className="border px-4 py-2 text-center">{item.RepairNo}</td>
-              <td className="border px-4 py-2">{item.DptCode}</td>
-              <td className="border px-4 py-2">{item.DptName}</td>
-              <td className="border px-4 py-2 text-center">{item.systemname}</td>
-              <td className="border px-4 py-2">{item.name_Device}</td>
-              <td className="border px-4 py-2 text-center">{item.DeviceToolID}</td>
-              <td className="border px-4 py-2">{item.Model}</td>
-              <td className="border px-4 py-2">{item.ToolAssetID}</td>
-              <td className="border px-4 py-2">{item.description}</td>
-              <td className="border px-4 py-2 text-center">{item.cvcreatedate}</td>
-              <td className="border px-4 py-2">{item.EmpName}</td>
-              <td className="border px-4 py-2 text-center">{item.status}</td>
-              <td className="border border-r border-l px-4 py-2 text-center items-center"> 
-                <div className="flex items-center justify-center cursor-pointer hover:text-blue-500" onClick={() => PrintPdf(item.RepairID)}>
-                  <FaPrint size={18} />
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
+      <tbody> 
+        {data.map((item, index) => (
+          <tr onClick={() => handleRowClick(item.RepairID)} key={item.RepairID} className="cursor-pointer text-black text-xs even:bg-white odd:bg-[#ecf0f0] hover:bg-blue-100">
+            <td className="border px-4 py-2 text-center">{index + 1}</td>
+            <td className="border px-4 py-2 text-center">{item.RepairNo}</td>
+            <td className="border px-4 py-2">{item.DptCode}</td>
+            <td className="border px-4 py-2">{item.DptName}</td>
+            <td className="border px-4 py-2 text-center">{item.systemname}</td>
+            <td className="border px-4 py-2">{item.name_Device}</td>
+            <td className="border px-4 py-2 text-center">{item.DeviceToolID}</td>
+            <td className="border px-4 py-2">{item.Model}</td>
+            <td className="border px-4 py-2">{item.ToolAssetID}</td>
+            <td className="border px-4 py-2">{item.description}</td>
+            <td className="border px-4 py-2 text-center">{item.cvcreatedate}</td>
+            <td className="border px-4 py-2">{item.EmpName}</td>
+            <td className="border px-4 py-2 text-center">{item.status}</td>
+            <td className="border border-r border-l px-4 py-2 text-center items-center"> 
+              <div className="flex items-center justify-center cursor-pointer hover:text-blue-500" onClick={() => PrintPdf(item.RepairID)}>
+                <FaPrint size={18} />
+              </div>
+            </td>
+          </tr>
+        ))}
+      </tbody>
 
     </table>
 
@@ -609,11 +656,11 @@ export default function RepairNotify() {
         pageCount={pageCount}
         onPageChange={handlePageClick}
         containerClassName={"flex justify-center mt-4 space-x-2"}
-        pageClassName={"border border-gray-300 rounded px-3 py-1 cursor-pointer bg-yellow-50 text-black"}
-        activeClassName={"bg-yellow-500 text-black"}
-        previousClassName={"text-black border border-gray-300 rounded px-3 py-1 cursor-pointer bg-yellow-500"}
-        nextClassName={"text-black border border-gray-300 rounded px-3 py-1 cursor-pointer bg-yellow-500"}
-        disabledClassName={"opacity-50 cursor-not-allowed bg-yellow-50"}
+        pageClassName={"border border-gray-300 rounded px-3 py-1 cursor-pointer bg-gray-50 text-black"}
+        activeClassName={"bg-gray-200 text-black"}
+        previousClassName={"text-black border border-gray-300 rounded px-3 py-1 cursor-pointer bg-gray-200"}
+        nextClassName={"text-black border border-gray-300 rounded px-3 py-1 cursor-pointer bg-gray-200"}
+        disabledClassName={"opacity-50 cursor-not-allowed bg-gray-50"}
       />
 
 
@@ -621,7 +668,7 @@ export default function RepairNotify() {
 
   </div>
   
-       
+      
     {showModalAdd && (
         <div
           className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
@@ -634,7 +681,7 @@ export default function RepairNotify() {
           >
             {/* Head */}
             
-           <div
+          <div
               className="border-b px-6 py-4 border-black flex justify-between items-center"
               style={{ backgroundColor: "#fec235" }}
             >
@@ -659,7 +706,7 @@ export default function RepairNotify() {
             </div>
 
             <div className="px-6 py-4 grid grid-cols-4 md:grid-cols-4 gap-4">
-               {/* ชุดที่ 1 */}
+              {/* ชุดที่ 1 */}
               <div className="flex flex-col">
                 <label className="mb-1 text-sm font-medium text-black">วันที่</label>
                 <input
@@ -712,7 +759,7 @@ export default function RepairNotify() {
                     ))}
                   </select>
 
-               
+              
               </div>
 
               {/* ชุดที่ 4 */}
@@ -788,10 +835,10 @@ export default function RepairNotify() {
 
             </div>
 
-           <div className="px-6 py-4 grid grid-cols-3 md:grid-cols-3 gap-4">
+          <div className="px-6 py-4 grid grid-cols-3 md:grid-cols-3 gap-4">
               {/* ชุดที่ 1 */}
               <div className="flex flex-col">
-                <label className="mb-1 text-sm font-medium text-black">หมายเลขเครื่อง<span className="text-red-500"> *ระบุตัวเลขเท่านั้น</span></label>
+                <label className="mb-1 text-sm font-medium text-black">หมายเลขเครื่อง<span className="text-red-500"> *กรณีที่ไม่มีให้ใส่ 0</span></label>
                 <input
                   name="tbToolNumber"
                   type="text"
@@ -822,7 +869,7 @@ export default function RepairNotify() {
               
               {/* ชุดที่ 3 */}
               <div className="flex flex-col">
-                <label className="mb-1 text-sm font-medium text-black">รหัสทรัพย์สิน</label>
+                <label className="mb-1 text-sm font-medium text-black">รหัสทรัพย์สิน<span className="text-red-500"> *กรณีที่ไม่มีให้ใส่ 0</span></label>
                 <input
                   name="tbAssetID"
                   type="text"
@@ -838,7 +885,7 @@ export default function RepairNotify() {
 
             </div>
 
-           <div className="px-6 py-4 grid grid-cols-1 md:grid-cols-1 gap-4">
+          <div className="px-6 py-4 grid grid-cols-1 md:grid-cols-1 gap-4">
               <label className="text-sm font-medium text-black">รายละเอียดอาการ<span className="text-red-500"> * กรุณาระบุรายละเอียดอาการให้ครบถ้วน</span></label>
               <textarea
                 rows={4}
