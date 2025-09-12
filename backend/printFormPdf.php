@@ -2,34 +2,33 @@
 ob_start();
 // ตอบ OPTIONS preflight request
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-  header("Access-Control-Allow-Origin: *");              // อนุญาตทุก origin (จะเปลี่ยนเป็นชื่อโดเมนเฉพาะก็ได้)
-  header("Access-Control-Allow-Methods: POST, GET, OPTIONS");  // กำหนด method ที่อนุญาต
-  header("Access-Control-Allow-Headers: Content-Type");  // อนุญาต header Content-Type
-  header("Access-Control-Max-Age: 86400");               // cache การตอบ preflight ได้นาน 1 วัน
+  header("Access-Control-Allow-Origin: *");
+  header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+  header("Access-Control-Allow-Headers: Content-Type");
+  header("Access-Control-Max-Age: 86400");
   exit(0);
 }
+
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/pdf");
+
+$repairID = intval($_GET['id']); // แปลงเป็นเลขจำนวนเต็ม
+
 require 'vendor/autoload.php';
 require_once 'db.php';
 
-use Dompdf\Dompdf; //เรียก class หลักเพื่อแปลง HTML เป็น PDF
-use Dompdf\Options; //เรียก class สำหรับตั้งค่าต่าง ๆ ของ Dompdf
-
-$inputJSON = file_get_contents('php://input');
-$input = json_decode($inputJSON, true);
-
-$repairID = $input["repairID"];
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 $qry = 'select t1."RepairNo",to_char(t1."RepairNotifyDate",\'DD/MM/YYYY\') as cvdate,t1."DptName",t1."DptCode",t1."EmpName",CASE WHEN t1."SystemType" = \'P\' THEN \'P/C\' else \'AS/400\' end as systemtype,t2."name_Device",t1."DeviceToolID",t1."Model",t1."ToolAssetID",t1."description" from "rp_Repair_Notify" t1 
 left join "Master_Device_Type" t2 on t1."DeviceTypeID" = t2."id"
-where t1."StatusDelete" = 0 and t1."RepairID" = ' . $repairID . ' ';
+where t1."StatusDelete" = 0 and t1."RepairID" = ' . $repairID;
 
 $res = pg_query($Con,$qry);
 
 if(pg_num_rows($res) > 0){
   $dt = pg_fetch_assoc($res);
-}
+} 
 
 $html = '
 <html>
@@ -64,11 +63,11 @@ $html = '
       <hr style="margin-top:15px;">
       <div style="font-size: 18px;">
         <span style="margin-right: 250px;">ฝ่าย / แผนก : ' . $dt["DptName"] . ' </span>
-        <span style="margin-left: 250px;">วันที่ : ' . $dt["cvdate"] . ' <span></span></span>
+        <span style="margin-left: 130px;">วันที่ : ' . $dt["cvdate"] . ' <span></span></span>
       </div>
       <div style="font-size: 18px; margin-bottom: 4px;">
         <span style="margin-right: 250px;">ผู้แจ้ง : ' . $dt["EmpName"] . '</span>
-        <span style="margin-left: 282px;">รหัสแผนก : ' . $dt["DptCode"] . '</span> 
+        <span style="margin-left: 290px;">รหัสแผนก : ' . $dt["DptCode"] . '</span> 
       </div>
       <div style="font-size: 18px; margin-bottom: 4px;">ประเภท : ' . $dt["systemtype"] . ' </div>
       <div style="font-size: 18px; margin-bottom: 8px;">ชนิดอุปกรณ์ : ' . $dt["name_Device"] . ' </div>
@@ -99,6 +98,4 @@ $dompdf->loadHtml($html);
 $dompdf->setPaper('A4', 'landscape');
 $dompdf->render();
 $dompdf->stream("file.pdf", ["Attachment" => false]);
-
-
 ?>
