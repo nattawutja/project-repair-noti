@@ -83,13 +83,38 @@ $qry .= "'" . $date->format('Y-m-d H:i:s') . "',";
 if($input["tbTool"] != ""){
     $qry .= "" . $input["tbTool"] . "";   
 }
-$qry .= ');';
+$qry .= ') RETURNING "RepairID";';
 
-pg_query($Con,$qry);
+$res = pg_query($Con,$qry);
+
+if(pg_num_rows($res) > 0){
+    $dt = pg_fetch_assoc($res);
+
+    $qryIT = 'select concat("firstName",\' \',"lastName") as fullname from "User" WHERE "employeeId" = \'EMP001\' ';
+    $resIT = pg_query($Con,$qryIT);
+    if(pg_num_rows($resIT) > 0){
+        $dtMemberIT = pg_fetch_assoc($resIT);
+        $fullNameIT = $dtMemberIT["fullname"];
+    }
+
+    $qryUser = 'select concat("firstName",\' \',"lastName") as fullname from "User" WHERE "employeeId" = \'EMP002\' ';
+    $resUser = pg_query($Con,$qryUser);
+    if(pg_num_rows($resUser) > 0){
+        $dtMemberUser = pg_fetch_assoc($resUser);
+        $fullNameUser = $dtMemberUser["fullname"];
+    }
+
+
+    $qryApprove = 'INSERT INTO "rp_Repair_Notify_Approve"("RepairID","fullName") VALUES('. $dt["RepairID"] .',\'' . $fullNameIT . '\');';
+    $resInsApproveIT = pg_query($Con,$qryApprove);
+
+    $qryInsApproveUser = 'INSERT INTO "rp_Repair_Notify_Approve"("RepairID","fullName") VALUES('. $dt["RepairID"] .',\'' . $fullNameUser . '\');';
+    $resInsApproveUser = pg_query($Con,$qryInsApproveUser);
+}
 
 echo json_encode([
     'success' => true,
-    'received' => $qry
+    'received' => $qryApprove
 ]);
 
 ?>
