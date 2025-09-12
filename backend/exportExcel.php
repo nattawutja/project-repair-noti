@@ -53,7 +53,7 @@ $sheet->setCellValue('L1', 'ผู้แจ้ง');
 $sheet->setCellValue('M1', 'สถานะ');
 
 
-$qryExport = 'select ROW_NUMBER() OVER (ORDER BY t1."RepairID") AS row_index,t1."RepairNo",t1."DptCode",t1."DptName",CASE WHEN t1."SystemType" = \'P\' THEN \'P/C\' else \'AS/400\' end as systemtype,t2."name_Device",t1."DeviceToolID",t1."Model",t1."ToolAssetID",t1."description",to_char(t1."RepairNotifyDate",\'DD/MM/YYYY\') as cvdate,t1."EmpName",case when t1."StatusWork" = 0 then \'รอ IT ตรวจสอบ\' else \'จบงาน\' end as statuswork from "rp_Repair_Notify" t1
+$qryExport = 'select ROW_NUMBER() OVER (ORDER BY t1."RepairID") AS row_index,t1."RepairNo",t1."DptCode",t1."DptName",CASE WHEN t1."SystemType" = \'P\' THEN \'P/C\' else \'AS/400\' end as systemtype,t2."name_Device",t1."DeviceToolID",t1."Model",t1."ToolAssetID",t1."description",to_char(t1."RepairNotifyDate",\'DD/MM/YYYY\') as cvdate,t1."EmpName",case when t1."StatusWork" = 0 then \'รอ IT ตรวจสอบ\' WHEN t1."StatusWork" = 1 then \'รอผู้แจ้งตรวจสอบ\' else \'จบงาน\' end as statuswork from "rp_Repair_Notify" t1
 left join "Master_Device_Type" t2 on t1."DeviceTypeID" = t2."id"
 where 1=1 and t1."StatusDelete" = 0 ';
 
