@@ -8,7 +8,6 @@ include 'db.php';
 
 $date = new DateTime("now", new DateTimeZone('Asia/Bangkok'));
 
-
 $inputJSON = file_get_contents('php://input');
 $input = json_decode($inputJSON, true);
 $RepairNo = '';
@@ -90,31 +89,23 @@ $res = pg_query($Con,$qry);
 if(pg_num_rows($res) > 0){
     $dt = pg_fetch_assoc($res);
 
-    $qryIT = 'select concat("firstName",\' \',"lastName") as fullname from "User" WHERE "employeeId" = \'EMP001\' ';
+    $qryIT = 'select concat("firstName",\' \',"lastName") as fullname,"id" from "User" WHERE "employeeId" = \'EMP001\' ';
     $resIT = pg_query($Con,$qryIT);
     if(pg_num_rows($resIT) > 0){
         $dtMemberIT = pg_fetch_assoc($resIT);
         $fullNameIT = $dtMemberIT["fullname"];
+        $idIT = $dtMemberIT["id"];
     }
 
-    $qryUser = 'select concat("firstName",\' \',"lastName") as fullname from "User" WHERE "employeeId" = \'EMP002\' ';
-    $resUser = pg_query($Con,$qryUser);
-    if(pg_num_rows($resUser) > 0){
-        $dtMemberUser = pg_fetch_assoc($resUser);
-        $fullNameUser = $dtMemberUser["fullname"];
-    }
-
-
-    $qryApprove = 'INSERT INTO "rp_Repair_Notify_Approve"("RepairID","fullName") VALUES('. $dt["RepairID"] .',\'' . $fullNameIT . '\');';
+    $qryApprove = 'INSERT INTO "rp_Repair_Notify_Approve"("RepairID","fullName","user_id","pos_id") VALUES('. $dt["RepairID"] .',\'' . $fullNameIT . '\',\'' . $idIT . '\',1);';
     $resInsApproveIT = pg_query($Con,$qryApprove);
-
-    $qryInsApproveUser = 'INSERT INTO "rp_Repair_Notify_Approve"("RepairID","fullName") VALUES('. $dt["RepairID"] .',\'' . $fullNameUser . '\');';
+    
+    $qryInsApproveUser = 'INSERT INTO "rp_Repair_Notify_Approve"("RepairID","fullName","user_id","pos_id") VALUES('. $dt["RepairID"] .',\'' . $input["fullname"] . '\',\'' . $input["userID"] . '\',2);';
     $resInsApproveUser = pg_query($Con,$qryInsApproveUser);
 }
 
 echo json_encode([
-    'success' => true,
-    'received' => $qryApprove
+    'success' => true
 ]);
 
 ?>
