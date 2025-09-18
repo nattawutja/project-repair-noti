@@ -29,32 +29,36 @@ $StatusWork = $_GET['tbStatusWorkSearch'] ?? '';
 $DateNotiStart = $_GET['tbDateNotiStartSearch'] ?? '';
 $DateNotiEnd = $_GET['tbDateNotiEndSearch'] ?? '';
 $EmpName = $_GET['tbEmpNameSearch'] ?? '';
+$dviCode = $_GET['tbDviNameSearch'] ?? '';
 
 
 // สร้างไฟล์ใหม่
 $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
 
-$sheet->getStyle('A1:M1')->getFill()->setFillType(Fill::FILL_SOLID);//ในช่วงเซลล์ A1:M1 (คือแถวแรก ตั้งแต่คอลัมน์ A ถึง M) ให้กำหนด รูปแบบการเติมสีพื้นหลัง (Fill)
-$sheet->getStyle('A1:M1')->getFill()->getStartColor()->setARGB('FFFFFF00');  // บรรทัดนี้จะตั้งค่าสีพื้นหลังของเซลล์ในช่วง A1:M1 ให้เป็นสี LightSteelBlue
+$sheet->getStyle('A1:N1')->getFill()->setFillType(Fill::FILL_SOLID);//ในช่วงเซลล์ A1:M1 (คือแถวแรก ตั้งแต่คอลัมน์ A ถึง M) ให้กำหนด รูปแบบการเติมสีพื้นหลัง (Fill)
+$sheet->getStyle('A1:N1')->getFill()->getStartColor()->setARGB('FFFFFF00');  // บรรทัดนี้จะตั้งค่าสีพื้นหลังของเซลล์ในช่วง A1:M1 ให้เป็นสี LightSteelBlue
 // เขียนหัวตาราง
 $sheet->setCellValue('A1', 'ลำดับ');
 $sheet->setCellValue('B1', 'เลขที่เอกสาร');
-$sheet->setCellValue('C1', 'รหัสแผนก');
-$sheet->setCellValue('D1', 'แผนก');
-$sheet->setCellValue('E1', 'ประเภท');
-$sheet->setCellValue('F1', 'ชนิดอุปกรณ์');
-$sheet->setCellValue('G1', 'หมายเลขเครื่อง');
-$sheet->setCellValue('H1', 'รุ่น');
-$sheet->setCellValue('I1', 'รหัสทรัพย์สิน');
-$sheet->setCellValue('J1', 'รายละเอียด');
-$sheet->setCellValue('K1', 'วันที่แจ้ง');
-$sheet->setCellValue('L1', 'ผู้แจ้ง');
-$sheet->setCellValue('M1', 'สถานะ');
+$sheet->setCellValue('C1', 'ฝ่าย');
+$sheet->setCellValue('D1', 'รหัสแผนก');
+$sheet->setCellValue('E1', 'แผนก');
+$sheet->setCellValue('F1', 'ประเภท');
+$sheet->setCellValue('G1', 'ชนิดอุปกรณ์');
+$sheet->setCellValue('H1', 'หมายเลขเครื่อง');
+$sheet->setCellValue('I1', 'รุ่น');
+$sheet->setCellValue('J1', 'รหัสทรัพย์สิน');
+$sheet->setCellValue('K1', 'รายละเอียด');
+$sheet->setCellValue('L1', 'วันที่แจ้ง');
+$sheet->setCellValue('M1', 'ผู้แจ้ง');
+$sheet->setCellValue('N1', 'สถานะ');
 
 
-$qryExport = 'select ROW_NUMBER() OVER (ORDER BY t1."RepairID") AS row_index,t1."RepairNo",t1."DptCode",t1."DptName",CASE WHEN t1."SystemType" = \'P\' THEN \'P/C\' else \'AS/400\' end as systemtype,t2."name_Device",t1."DeviceToolID",t1."Model",t1."ToolAssetID",t1."description",to_char(t1."RepairNotifyDate",\'DD/MM/YYYY\') as cvdate,t1."EmpName",case when t1."StatusWork" = 0 then \'รอ IT ตรวจสอบ\' WHEN t1."StatusWork" = 1 then \'รอผู้แจ้งตรวจสอบ\' else \'จบงาน\' end as statuswork from "rp_Repair_Notify" t1
+$qryExport = 'select ROW_NUMBER() OVER (ORDER BY t1."RepairID") AS row_index,t1."RepairNo",t4."name",t1."DptCode",t3."name",CASE WHEN t1."SystemType" = \'P\' THEN \'P/C\' else \'AS/400\' end as systemtype,t2."name_Device",t1."DeviceToolID",t1."Model",t1."ToolAssetID",t1."description",to_char(t1."RepairNotifyDate",\'DD/MM/YYYY\') as cvdate,t1."EmpName",case when t1."StatusWork" = 0 THEN \'รอ IT ตรวจสอบ\' WHEN t1."StatusWork" = 1 THEN \'กำลังดำเนินการ\' WHEN t1."StatusWork" = 2 THEN \'รอผู้แจ้งตรวจสอบ\' else \'จบงาน\' end as statuswork from "rp_Repair_Notify" t1
 left join "Master_Device_Type" t2 on t1."DeviceTypeID" = t2."id"
+left join "Department" t3 on t1."DptCode" = t3."code"
+left join "Division" t4 on t1."DviCode" = t4."code"
 where 1=1 and t1."StatusDelete" = 0 ';
 
 if (!empty($docNo)) {
@@ -67,10 +71,14 @@ if (!empty($DateNotiStart) && !empty($DateNotiEnd)) {
   $qryExport .= ' AND t1."RepairNotifyDate"  = \'' . $DateNotiStart . '\' ';
 }
 
+if (!empty($dviCode)) {
+  $qryExport .= ' AND t1."DviCode"  = \'' . $dviCode . '\' ';
+}
 
 if (!empty($dptCode)) {
   $qryExport .= ' AND t1."DptCode"  Ilike \'%' . $dptCode . '%\' ';
 }
+
 if (!empty($dptName)) {
   $qryExport .= ' AND "DptName"  Ilike \'%' . $dptName . '%\' ';
 }
@@ -123,6 +131,7 @@ for ($i = 0; $i < count($dt); $i++) {
   $sheet->setCellValue('K' . $row, $dt[$i][10]);
   $sheet->setCellValue('L' . $row, $dt[$i][11]);
   $sheet->setCellValue('M' . $row, $dt[$i][12]);
+  $sheet->setCellValue('N' . $row, $dt[$i][13]);
 }
 
 $writer = new Xlsx($spreadsheet);
