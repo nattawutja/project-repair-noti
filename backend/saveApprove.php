@@ -11,13 +11,9 @@ $posid = intval($_GET['posid']); // แปลงเป็นเลขจำน�
 $qryApprove = 'UPDATE "rp_Repair_Notify_Approve" SET "Approve" = \'' . "Y" . '\',"ApproveDate" = \'' . $date -> format('Y-m-d H:i:s') . '\' where "ApproveID" = ' . $ApproveID . ' AND "RepairID" = ' . $RepairID . '';
 pg_query($Con, $qryApprove);
 
-if($posid == 1){
-    $qryUptTableMain = 'UPDATE "rp_Repair_Notify" SET "StatusWork" = ' . 1 . ',"send_work_date" = \'' . $date -> format('Y-m-d H:i:s') . '\' where "StatusDelete" = 0 AND "RepairID" = ' . $RepairID . ' ';
-    pg_query($Con, $qryUptTableMain);
-}else{
-    $qryUptTableMain = 'UPDATE "rp_Repair_Notify" SET "StatusWork" = ' . 2 . ' where "StatusDelete" = 0 AND "RepairID" = ' . $RepairID . ' ';
-    pg_query($Con, $qryUptTableMain);
-}
+
+$qryUptTableMain = 'UPDATE "rp_Repair_Notify" SET "StatusWork" = ' . 3 . ' where "StatusDelete" = 0 AND "RepairID" = ' . $RepairID . ' ';
+pg_query($Con, $qryUptTableMain);
 
 echo json_encode([
     'success' => true
