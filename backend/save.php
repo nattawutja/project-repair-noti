@@ -4,7 +4,7 @@ header("Access-Control-Allow-Methods: POST, GET, OPTIONS"); // กำหนด m
 header("Access-Control-Allow-Headers: Content-Type"); // กำหนด header ที่อนุญาต
 header("Content-Type: application/json");
 
-include 'db.php';
+require 'db.php';
 
 $date = new DateTime("now", new DateTimeZone('Asia/Bangkok'));
 
@@ -42,19 +42,19 @@ if(pg_num_rows($resDocno) > 0){
 }
 
 
-$qry = 'insert into "rp_Repair_Notify"("RepairNo","RepairNotifyDate","DptCode","DptName","EmpName","SystemType","DeviceToolID","OtherTool","Model","ToolAssetID","description","create_by","create_date","DeviceTypeID") values(';
+$qry = 'insert into "rp_Repair_Notify"("RepairNo","RepairNotifyDate","DptCode","DviCode","EmpName","SystemType","DeviceToolID","OtherTool","Model","ToolAssetID","description","create_by","create_date","DeviceTypeID") values(';
 $qry .= "'" . $RepairNo . "',"; 
 if($input["tbDateNoti"] != ""){
     $qry .= "'" . $input["tbDateNoti"] . "',";   
 }
-if($input["tbDptCode"] != ""){
-    $qry .= "'" . $input["tbDptCode"] . "',";   
+if($input["dpt_code"] != ""){
+    $qry .= "'" . $input["dpt_code"] . "',";   
 }
-if($input["tbDptName"] != ""){
-    $qry .= "'" . $input["tbDptName"] . "',";   
+if($input["dvi_code"] != ""){
+    $qry .= "'" . $input["dvi_code"] . "',";   
 }
-if($input["tbNameEmp"] != ""){
-    $qry .= "'" . $input["tbNameEmp"] . "',";   
+if($input["fullname"] != ""){
+    $qry .= "'" . $input["fullname"] . "',";   
 }
 if($input["tbSystemType"] != ""){
     $qry .= "'" . $input["tbSystemType"] . "',";   
@@ -89,18 +89,17 @@ $res = pg_query($Con,$qry);
 if(pg_num_rows($res) > 0){
     $dt = pg_fetch_assoc($res);
 
-    $qryIT = 'select concat("firstName",\' \',"lastName") as fullname,"id" from "User" WHERE "employeeId" = \'EMP001\' ';
-    $resIT = pg_query($Con,$qryIT);
-    if(pg_num_rows($resIT) > 0){
-        $dtMemberIT = pg_fetch_assoc($resIT);
-        $fullNameIT = $dtMemberIT["fullname"];
-        $idIT = $dtMemberIT["id"];
-    }
-
-    $qryApprove = 'INSERT INTO "rp_Repair_Notify_Approve"("RepairID","fullName","user_id","pos_id") VALUES('. $dt["RepairID"] .',\'' . $fullNameIT . '\',\'' . $idIT . '\',1);';
-    $resInsApproveIT = pg_query($Con,$qryApprove);
+    // $qryIT = 'select concat("firstName",\' \',"lastName") as fullname,"id" from "User" WHERE "employeeId" = \'EMP001\' ';
+    // $resIT = pg_query($Con,$qryIT);
+    // if(pg_num_rows($resIT) > 0){
+    //     $dtMemberIT = pg_fetch_assoc($resIT);
+    //     $fullNameIT = $dtMemberIT["fullname"];
+    //     $idIT = $dtMemberIT["id"];
+    // }
+    // $qryApprove = 'INSERT INTO "rp_Repair_Notify_Approve"("RepairID","fullName","user_id","pos_id") VALUES('. $dt["RepairID"] .',\'' . $fullNameIT . '\',\'' . $idIT . '\',1);';
+    // $resInsApproveIT = pg_query($Con,$qryApprove);
     
-    $qryInsApproveUser = 'INSERT INTO "rp_Repair_Notify_Approve"("RepairID","fullName","user_id","pos_id") VALUES('. $dt["RepairID"] .',\'' . $input["fullname"] . '\',\'' . $input["userID"] . '\',2);';
+    $qryInsApproveUser = 'INSERT INTO "rp_Repair_Notify_Approve"("RepairID","fullName","user_id","pos_id") VALUES('. $dt["RepairID"] .',\'' . $input["fullname"] . '\',\'' . $input["userID"] . '\',1);';
     $resInsApproveUser = pg_query($Con,$qryInsApproveUser);
 }
 
