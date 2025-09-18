@@ -20,8 +20,10 @@ require_once 'db.php';
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
-$qry = 'select t1."RepairNo",to_char(t1."RepairNotifyDate",\'DD/MM/YYYY\') as cvdate,t1."DptName",t1."DptCode",t1."EmpName",CASE WHEN t1."SystemType" = \'P\' THEN \'P/C\' else \'AS/400\' end as systemtype,t2."name_Device",t1."DeviceToolID",t1."Model",t1."ToolAssetID",t1."description" from "rp_Repair_Notify" t1 
+$qry = 'SELECT t1."RepairNo",to_char(t1."RepairNotifyDate",\'DD/MM/YYYY\') as cvdate,t1."DptCode",t1."EmpName",t3."name",
+CASE WHEN t1."SystemType" = \'P\' THEN \'P/C\' else \'AS/400\' end as systemtype,t2."name_Device",t1."DeviceToolID",t1."Model",t1."ToolAssetID",t1."description" from "rp_Repair_Notify" t1 
 left join "Master_Device_Type" t2 on t1."DeviceTypeID" = t2."id"
+left join "Division" t3 on t1."DviCode" = t3."code"
 where t1."StatusDelete" = 0 and t1."RepairID" = ' . $repairID;
 
 $res = pg_query($Con,$qry);
@@ -62,12 +64,12 @@ $html = '
     </div>
       <hr style="margin-top:15px;">
       <div style="font-size: 18px;">
-        <span style="margin-right: 250px;">ฝ่าย / แผนก : ' . $dt["DptName"] . ' </span>
+        <span style="margin-right: 230px;">ฝ่าย / แผนก : ' . $dt["name"] . ' </span>
         <span style="margin-left: 130px;">วันที่ : ' . $dt["cvdate"] . ' <span></span></span>
       </div>
       <div style="font-size: 18px; margin-bottom: 4px;">
-        <span style="margin-right: 250px;">ผู้แจ้ง : ' . $dt["EmpName"] . '</span>
-        <span style="margin-left: 290px;">รหัสแผนก : ' . $dt["DptCode"] . '</span> 
+        <span style="margin-right: 185px;">ผู้แจ้ง : ' . $dt["EmpName"] . '</span>
+        <span style="margin-left: 166px;">รหัสแผนก : ' . $dt["DptCode"] . '</span> 
       </div>
       <div style="font-size: 18px; margin-bottom: 4px;">ประเภท : ' . $dt["systemtype"] . ' </div>
       <div style="font-size: 18px; margin-bottom: 8px;">ชนิดอุปกรณ์ : ' . $dt["name_Device"] . ' </div>
