@@ -8,7 +8,7 @@ header("Content-Type: application/json");
 require_once 'db.php';
 $repairID = $_GET["id"];
 $data = [];
-$qry = 'select "user_id","pos_id","ApproveID","RepairID","fullName","Approve",to_char("ApproveDate",\'DD/MM/YYYY\') as cvdateapprovedate,to_char("ApproveDate",\'HH24:MI:ss\') as cvdateapprovetime from "rp_Repair_Notify_Approve" where "RepairID" = ' . $repairID . ' order by "ApproveID","ApproveDate"';
+$qry = 'select "user_id","pos_id","ApproveID","RepairID","fullName","Approve",to_char("ApproveDate",\'DD/MM/YYYY\') as cvdateapprovedate,to_char("ApproveDate",\'HH24:MI:ss\') as cvdateapprovetime from "rp_Repair_Notify_Approve" where "RepairID" = ' . $repairID . ' and "pos_id" = 1 order by "ApproveID","ApproveDate"';
 $result = pg_query($Con, $qry);
 if ($result) {
   while ($row = pg_fetch_assoc($result)) {
