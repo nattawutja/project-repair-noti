@@ -10,7 +10,10 @@
     $username = $dt['username'] ?? '';
     $password = $dt['password'] ?? '';
 
-    $qry = 'SELECT concat("firstName",\' \',"lastName") as fullname,* From "User" WHERE "employeeId" = \'' . $username . '\'';
+    $qry = 'SELECT concat(t1."firstName",\' \',t1."lastName") as fullname,t1."id",t1."department_code",t1."division_code",t2."name",t1."password"  FROM "User" t1
+    left join "Division" t2 on t1."division_code" = t2."code"
+    left join "Department" t3 on t1."department_code" = t3."code"
+    WHERE t1."employeeId" = \'' . $username . '\'';
     $res = pg_query($Con,$qry);
     if(pg_num_rows($res) > 0){
         $dt = pg_fetch_assoc($res);
@@ -28,8 +31,10 @@
     echo json_encode([
         'Status' => $status,
         'fullname' => $fullname,
-        'id' => $dt["id"]
-
+        'id' => $dt["id"],
+        'dpt_code' => $dt["department_code"],
+        'dvi_code' => $dt["division_code"],
+        'name_dvi' => $dt["name"]
     ]);
 
     pg_close($Con);
