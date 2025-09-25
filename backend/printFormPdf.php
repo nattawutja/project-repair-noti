@@ -53,40 +53,67 @@ $html = '
     </style>
   </head>
   <body>
-    <div style="font-size: 15px; text-align: right;">
-      เลขเอกสาร : ' . $dt["RepairNo"] . '
-    </div>
-    <div style="font-size: 18px; font-weight: bold; text-align: center;">
+   <div style="font-size: 22px; font-weight: bold; text-align: left;">
       บริษัท โรงงานผลิตภัณฑ์อาหารไทย จำกัด
     </div>
-    <div style="align-items: center;  margin-top: 5px;">
-      <div style="text-align: center; flex: 1; font-size: 22px; font-weight: bold;">ใบแจ้งซ่อมอุปกรณ์คอมพิวเตอร์</div>
+    <div style="font-size: 15px; text-align: right;">
+     เลขเอกสาร ______<span style="text-decoration:underline;"> ' . $dt["RepairNo"] . '</span>_______
+
     </div>
-      <hr style="margin-top:15px;">
-      <div style="font-size: 18px;">
-        <span style="margin-right: 230px;">ฝ่าย / แผนก : ' . $dt["name"] . ' </span>
-        <span style="margin-left: 130px;">วันที่ : ' . $dt["cvdate"] . ' <span></span></span>
-      </div>
-      <div style="font-size: 18px; margin-bottom: 4px;">
-        <span style="margin-right: 185px;">ผู้แจ้ง : ' . $dt["EmpName"] . '</span>
-        <span style="margin-left: 166px;">รหัสแผนก : ' . $dt["DptCode"] . '</span> 
-      </div>
-      <div style="font-size: 18px; margin-bottom: 4px;">ประเภท : ' . $dt["systemtype"] . ' </div>
-      <div style="font-size: 18px; margin-bottom: 8px;">ชนิดอุปกรณ์ : ' . $dt["name_Device"] . ' </div>
+    <div style="font-size: 15px; text-align: right; margin-top:5px;">
+     วันที่ ______<span style="text-decoration:underline;"> ' . $dt["cvdate"] . '</span>_______
+    </div>
+    <div style="font-size: 15px; text-align: right;  margin-top:5px;">
+      รหัสแผนก _________<span style="text-decoration:underline;"> ' . $dt["DptCode"] . '</span>_______
 
-      <div style="display: flex; justify-content: space-between; font-size: 18px; align-items: center; width: 100%;">
-        <label style="display: inline-block; margin-top: 0;">หมายเลขอุปกรณ์ : ' . $dt["DeviceToolID"] . ' </label>
+    </div>
+   
+    <div style="align-items: center;  margin-top: 5px;">
+      <div style="text-align: center; flex: 1; font-size: 35px; font-weight: bold;">ใบแจ้งซ่อมอุปกรณ์คอมพิวเตอร์</div>
+    </div>
+    <div style="font-size: 18px; margin-top:20px;">
+      <span style="margin-right: 20px;">ฝ่าย / แผนก  _____________________<span style="text-decoration:underline;">' . $dt["name"] . ' </span>_____________________</span>
+      <span">ชื่อ _______________________<span style="text-decoration:underline;"> ' . $dt["EmpName"] . ' </span>___________________________________</span>
+    </div>
+      
+
+      <div style="font-size: 18px;margin-top:15px;">
+      <span>ประเภท  _________________<span style="text-decoration:underline;"> ' . $dt["systemtype"] . '</span>_________________ </span>
+      <span style="margin-left:20px;">ชนิดอุปกรณ์ __________________<span style="text-decoration:underline;">' . $dt["name_Device"] . '</span>__________________ </span>
+      <span style="margin-left:20px;">อื่นๆ _____________________________________ </span>
       </div>
-      <div style="font-size: 18px; margin-bottom: 8px;">รุ่น : ' . $dt["Model"] . ' </div>
-      <div style="font-size: 18px; margin-bottom: 8px;">รหัสทรัพย์สิน : ' . $dt["ToolAssetID"] . ' </div>
-      <div style="font-size: 18px; margin-bottom: 8px;">รายละเอียด : ' . $dt["description"] . ' </div>
+   
+      <div style="font-size: 18px; display:flex; justify-content:between; margin-top:15px;">
+        <span>หมายเลขเครื่อง ________________<span style="text-decoration:underline;">' . $dt["DeviceToolID"] . '</span>__________________</span>
+        <span style="margin-left:20px;">รุ่น _____________________<span style="text-decoration:underline;">' . $dt["Model"] . '</span>_____________________</span>
+        <span style="margin-left:20px;">รหัสทรัพย์สิน ___________________<span style="text-decoration:underline;">' . $dt["ToolAssetID"] . '</span>______________________</span>
+      </div>
+      <div style="font-size: 18px; margin-top:15px;">รายละเอียดอาการ <span style="text-decoration:underline;"> ' . $dt["description"] . '</span>____________________________________________________________________________________________________________________________________________________
+      ___________________________________________________________________________________________________________________________________________________________________________________ 
+      </div>
 
-    <hr>
-
-    <div style="font-size: 18px; text-align: right; width: 100%; margin-top:15px;">
+    <div style="font-size: 18px; text-align: right; width: 100%; margin-top:20px;">
       ลงชื่อ_____________________<span style="text-decoration:underline">' . $dt["EmpName"] . '</span>____________________ผู้แจ้ง
     </div>
-  
+
+    <div style="margin-top:15px;font-size: 18px; margin-bottom: 8px;">สำหรับฝ่าย MIS : <span style="text-decoration:underline;"></span>_____________________________________________________________________________________________________________________________________________________________
+    ____________________________________________________________________________________________________________________________________________________________________________________ 
+    </div>
+
+    <div style="font-size: 18px; margin-top:20px;">
+      <span style="margin-right: 120px;">วันที่ตรวจรับการดำเนินการ : ___________/__________/__________ </span>
+      <span style="margin-left: 50px;">วันที่ดำเนินการแล้วเสร็จ : ___________/___________/__________ </span>
+    </div>
+
+    <div style="font-size: 18px; margin-top:20px;">
+      <span style="margin-right: 15px;">ลงชื่อ__________________________________________________________________ผู้ร้องขอ </span>
+      <span style="margin-left: 12px;">ลงชื่อ___________________________________________________________________ผู้ดำเนินงาน </span>
+    </div>
+
+    <div style="font-size: 15px; margin-top:20px;">
+      <span style="margin-right: 10px;">FM-MS-XX-002/Revision No.00</span>
+    </div>
+
   </body>
 </html>
 ';
