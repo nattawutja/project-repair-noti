@@ -22,7 +22,7 @@ $substrYear = substr($year,2);
 $month = $explodeDate[1];
 
 
-$RepairNoWhere .= "RP" . $substrYear . "/" . $month;
+$RepairNoWhere .= "RP" . $substrYear . "/";
 
 $qryNo = 'SELECT Distinct("RepairNo") FROM "rp_Repair_Notify" 
 WHERE "RepairNo" LIKE \'' . $RepairNoWhere . '%\' and "StatusDelete" = 0
@@ -33,12 +33,12 @@ $resDocno = pg_query($Con,$qryNo);
 
 if(pg_num_rows($resDocno) > 0){
     while($dtDocno = pg_fetch_assoc($resDocno)){
-        $DocNoLates =  substr($dtDocno["RepairNo"], -4) + 1;
-        $runningStr = str_pad($DocNoLates, 4, "0", STR_PAD_LEFT);
-        $RepairNo = "RP" . $substrYear . "/" . $month . $runningStr;
+        $DocNoLates =  substr($dtDocno["RepairNo"], -5) + 1;
+        $runningStr = str_pad($DocNoLates, 5, "0", STR_PAD_LEFT);
+        $RepairNo = "RP" . $substrYear . "/" . $runningStr;
     }
 }else{
-    $RepairNo = "RP" . $substrYear . "/" . $month . "0001";
+    $RepairNo = "RP" . $substrYear . "/" . "00001";
 }
 
 
@@ -61,6 +61,8 @@ if($input["tbSystemType"] != ""){
 }
 if($input["tbToolNumber"] != ""){
     $qry .= "'" . $input["tbToolNumber"] . "',";   
+}else{
+    $qry .= "'0',";
 }
 
 if($input["tbOtherTool"] != ""){
@@ -73,6 +75,8 @@ if($input["tbModel"] != ""){
 }
 if($input["tbAssetID"] != ""){
     $qry .= "'" . $input["tbAssetID"] . "',";   
+}else{
+    $qry .= "'0',";
 }
 if($input["tbDesc"] != ""){
     $qry .= "'" . $input["tbDesc"] . "',";   
