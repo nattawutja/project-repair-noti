@@ -36,20 +36,22 @@ $html = '
 <html>
   <head>
     <style>
-      @font-face {
-        font-family: "Sarabun";
-        src: url("fonts/Sarabun-Light.ttf") format("truetype");
-        font-weight: normal;
-      }
-      @font-face {
-        font-family: "Sarabun";
-        src: url("fonts/Sarabun-Light.ttf") format("truetype");
-        font-weight: bold;
-      }
-      body {
-        font-family: "Sarabun", sans-serif;
-        font-size: 16pt;
-      }
+    @font-face {
+      font-family: "Sarabun";
+      font-style: normal;
+      font-weight: 400;
+      src: url("fonts/Sarabun-Regular.ttf") format("truetype");
+    }
+    @font-face {
+      font-family: "Sarabun";
+      font-style: normal;
+      font-weight: 700;
+      src: url("fonts/Sarabun-Bold.ttf") format("truetype");
+    }
+    body {
+      font-family: "Sarabun", sans-serif;
+      font-weight: 400;
+    }
     </style>
   </head>
   <body>
@@ -92,22 +94,22 @@ $html = '
       ___________________________________________________________________________________________________________________________________________________________________________________ 
       </div>
 
-    <div style="font-size: 18px; text-align: right; width: 100%; margin-top:20px;">
+    <div style="font-size: 18px; text-align: right; width: 100%; margin-top:15px;">
       ลงชื่อ_____________________<span style="text-decoration:underline">' . $dt["EmpName"] . '</span>____________________ผู้แจ้ง
     </div>
 
-    <div style="margin-top:15px;font-size: 18px; margin-bottom: 8px;">สำหรับฝ่าย MIS : <span style="text-decoration:underline;"></span>_____________________________________________________________________________________________________________________________________________________________
-    ____________________________________________________________________________________________________________________________________________________________________________________ 
+    <div style="margin-top:15px;font-size: 18px;">สำหรับฝ่าย MIS : <span style="text-decoration:underline;"></span>______________________________________________________________________________________________________________________________________________________
+    _____________________________________________________________________________________________________________________________________________________________________________
     </div>
 
-    <div style="font-size: 18px; margin-top:20px;">
+    <div style="font-size: 18px; margin-top:15px;">
       <span style="margin-right: 120px;">วันที่ตรวจรับการดำเนินการ : ___________/__________/__________ </span>
       <span style="margin-left: 50px;">วันที่ดำเนินการแล้วเสร็จ : ___________/___________/__________ </span>
     </div>
 
-    <div style="font-size: 18px; margin-top:20px;">
-      <span style="margin-right: 15px;">ลงชื่อ__________________________________________________________________ผู้ร้องขอ </span>
-      <span style="margin-left: 12px;">ลงชื่อ___________________________________________________________________ผู้ดำเนินงาน </span>
+    <div style="font-size: 18px; margin-top:15px;">
+      <label style="margin-right: 5px;">ลงชื่อ__________________________________________________________________ผู้ร้องขอ </label>
+      <span style="margin-left: 5px;">ลงชื่อ___________________________________________________________________ผู้ดำเนินงาน </span>
     </div>
 
     <div style="font-size: 15px; margin-top:20px;">
@@ -121,10 +123,14 @@ $html = '
 $options = new Options();
 $options->setIsRemoteEnabled(true);
 $options->setChroot(__DIR__);
+$options->setIsRemoteEnabled(true);
 
 $dompdf = new Dompdf($options);
+$dompdf->set_option('isFontSubsettingEnabled', false);
+$dompdf->set_option('isHtml5ParserEnabled', true);
 $dompdf->loadHtml($html);
 $dompdf->setPaper('A4', 'landscape');
 $dompdf->render();
 $dompdf->stream("file.pdf", ["Attachment" => false]);
+
 ?>
