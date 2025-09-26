@@ -56,7 +56,13 @@ $sheet->setCellValue('N1', 'สถานะ');
 $sheet->setCellValue('O1', 'ผู้รับผิดชอบ');
 
 
-$qryExport = 'select ROW_NUMBER() OVER (ORDER BY t1."RepairID") AS row_index,t1."RepairNo",t4."name",t1."DptCode",t3."name",CASE WHEN t1."SystemType" = \'P\' THEN \'P/C\' else \'AS/400\' end as systemtype,t2."name_Device",t1."DeviceToolID",t1."Model",t1."ToolAssetID",t1."description",to_char(t1."RepairNotifyDate",\'DD/MM/YYYY\') as cvdate,t1."EmpName",case when t1."StatusWork" = 0 THEN \'รอ IT ตรวจสอบ\' WHEN t1."StatusWork" = 1 THEN \'กำลังดำเนินการ\' WHEN t1."StatusWork" = 2 THEN \'รอผู้แจ้งตรวจสอบ\' else \'จบงาน\' end as statuswork,concat(t5."firstName",\' \',t5."lastName") as fullnameit from "rp_Repair_Notify" t1
+$qryExport = 'select ROW_NUMBER() OVER (ORDER BY t1."RepairID") AS row_index,t1."RepairNo",t4."name",t1."DptCode",t3."name",CASE WHEN t1."SystemType" = \'P\' THEN \'P/C\' else \'AS/400\' end as systemtype,t2."name_Device",t1."DeviceToolID",t1."Model",t1."ToolAssetID",t1."description",to_char(t1."RepairNotifyDate",\'DD/MM/YYYY\') as cvdate,t1."EmpName",
+case when t1."StatusWork" = 0 THEN \'รอ IT ตรวจสอบ\' 
+WHEN t1."StatusWork" = 1 THEN \'กำลังดำเนินการ\' 
+WHEN t1."StatusWork" = 2 THEN \'ส่งซ่อม\'
+WHEN t1."StatusWork" = 3 THEN \'รออะไหล่ในการซ่อม\'
+WHEN t1."StatusWork" = 4 THEN \'รอผู้แจ้งตรวจสอบ\' 
+else \'จบงาน\' end as statuswork,concat(t5."firstName",\' \',t5."lastName") as fullnameit from "rp_Repair_Notify" t1
 left join "Master_Device_Type" t2 on t1."DeviceTypeID" = t2."id"
 left join "Department" t3 on t1."DptCode" = t3."code"
 left join "Division" t4 on t1."DviCode" = t4."code"
