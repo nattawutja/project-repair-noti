@@ -12,7 +12,7 @@ $qryApprove = 'UPDATE "rp_Repair_Notify_Approve" SET "Approve" = \'' . "Y" . '\'
 pg_query($Con, $qryApprove);
 
 
-$qryUptTableMain = 'UPDATE "rp_Repair_Notify" SET "StatusWork" = ' . 3 . ' where "StatusDelete" = 0 AND "RepairID" = ' . $RepairID . ' ';
+$qryUptTableMain = 'UPDATE "rp_Repair_Notify" SET "StatusWork" = ' . 5 . ' where "StatusDelete" = 0 AND "RepairID" = ' . $RepairID . ' ';
 pg_query($Con, $qryUptTableMain);
 
 echo json_encode([
