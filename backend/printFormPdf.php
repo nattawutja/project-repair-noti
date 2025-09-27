@@ -67,7 +67,6 @@ $html = '
     </div>
     <div style="font-size: 15px; text-align: right;  margin-top:5px;">
       รหัสแผนก _________<span style="text-decoration:underline;"> ' . $dt["DptCode"] . '</span>_______
-
     </div>
    
     <div style="align-items: center;  margin-top: 5px;">
