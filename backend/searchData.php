@@ -26,7 +26,7 @@ $offset = $page * $itemsPerPage;
 
 $strWhere = '';
 $strOrderBy = '';
-$qry = 'select t4."name" as dviname,
+$qry = 'select concat(t5."firstName",\' \',t5."lastName") as fullnameit,t4."name" as dviname,
 CASE WHEN t1."StatusWork" = 0 THEN \'รอ IT ตรวจสอบ\' 
 WHEN t1."StatusWork" = 1 THEN \'กำลังดำเนินการ\' 
 WHEN t1."StatusWork" = 2 THEN \'ส่งซ่อม\'
@@ -37,6 +37,7 @@ CASE WHEN t1."SystemType" = \'P\' THEN \'P/C\' else \'AS/400\' end as systemname
 left join "Master_Device_Type" t2 on t1."DeviceTypeID" = t2."id" and t2."StatusDelete" = 0
 left join "Department" t3 on t1."DptCode" = t3."code"
 left join "Division" t4 on t1."DviCode" = t4."code"
+left join "User" t5 on t1."user_id_IT" = t5."id"
 where 1=1 and t1."StatusDelete" = 0 ';
 
 if (!empty($docNo)) {
