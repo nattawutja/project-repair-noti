@@ -86,12 +86,11 @@ $html = '
       </div>
    
       <div style="font-size: 18px; display:flex; justify-content:between; margin-top:15px;">
-        <span>หมายเลขเครื่อง ________________<span style="text-decoration:underline;">' . $dt["DeviceToolID"] . '</span>__________________</span>
-        <span style="margin-left:20px;">รุ่น _____________________<span style="text-decoration:underline;">' . $dt["Model"] . '</span>_____________________</span>
-        <span style="margin-left:20px;">รหัสทรัพย์สิน ___________________<span style="text-decoration:underline;">' . $dt["ToolAssetID"] . '</span>______________________</span>
+        <span>หมายเลขเครื่อง _____________<span style="text-decoration:underline;">' . $dt["DeviceToolID"] . '</span>_______________</span>
+        <span style="margin-left:20px;">รุ่น ________________<span style="text-decoration:underline;">' . $dt["Model"] . '</span>________________</span>
+        <span style="margin-left:20px;">รหัสทรัพย์สิน _________<span style="text-decoration:underline;">' . $dt["ToolAssetID"] . '</span>_________</span>
       </div>
-      <div style="font-size: 18px; margin-top:15px;">รายละเอียดอาการ <span style="text-decoration:underline;"> ' . $dt["description"] . '</span>____________________________________________________________________________________________________________________________________________________
-      ___________________________________________________________________________________________________________________________________________________________________________________ 
+      <div style="font-size: 18px; margin-top:15px;">รายละเอียดอาการ <span style="text-decoration:underline;"> ' . $dt["description"] . '________________________________________________________________________________________________________________________________________</span>
       </div>
 
     <div style="font-size: 18px; text-align: right; width: 100%; margin-top:15px;">
