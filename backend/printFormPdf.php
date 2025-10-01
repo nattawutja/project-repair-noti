@@ -20,7 +20,7 @@ require_once 'db.php';
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
-$qry = 'SELECT t1."RepairNo",to_char(t1."RepairNotifyDate",\'DD/MM/YYYY\') as cvdate,t1."DptCode",t1."EmpName",t3."name",
+$qry = 'SELECT t1."OtherTool",t1."RepairNo",to_char(t1."RepairNotifyDate",\'DD/MM/YYYY\') as cvdate,t1."DptCode",t1."EmpName",t3."name",
 CASE WHEN t1."SystemType" = \'P\' THEN \'P/C\' else \'AS/400\' end as systemtype,t2."name_Device",t1."DeviceToolID",t1."Model",t1."ToolAssetID",t1."description" from "rp_Repair_Notify" t1 
 left join "Master_Device_Type" t2 on t1."DeviceTypeID" = t2."id"
 left join "Division" t3 on t1."DviCode" = t3."code"
@@ -81,7 +81,7 @@ $html = '
       <div style="font-size: 18px;margin-top:15px;">
       <span>ประเภท  _________________<span style="text-decoration:underline;"> ' . $dt["systemtype"] . '</span>_________________ </span>
       <span style="margin-left:20px;">ชนิดอุปกรณ์ __________________<span style="text-decoration:underline;">' . $dt["name_Device"] . '</span>__________________ </span>
-      <span style="margin-left:20px;">อื่นๆ _____________________________________ </span>
+      <span style="margin-left:20px;">อื่นๆ __________________<span style="text-decoration:underline;">' . $dt["OtherTool"] . '</span>__________________ </span>
       </div>
    
       <div style="font-size: 18px; display:flex; justify-content:between; margin-top:15px;">
@@ -89,7 +89,7 @@ $html = '
         <span style="margin-left:20px;">รุ่น ________________<span style="text-decoration:underline;">' . $dt["Model"] . '</span>________________</span>
         <span style="margin-left:20px;">รหัสทรัพย์สิน _________<span style="text-decoration:underline;">' . $dt["ToolAssetID"] . '</span>_________</span>
       </div>
-      <div style="font-size: 18px; margin-top:15px;">รายละเอียดอาการ <span style="text-decoration:underline;"> ' . $dt["description"] . '________________________________________________________________________________________________________________________________________</span>
+      <div style="font-size: 18px; margin-top:15px;">รายละเอียดอาการ <span style="text-decoration:underline;"> ' . $dt["description"] . '_________________________________________________________________________________</span>
       </div>
 
     <div style="font-size: 18px; text-align: right; width: 100%; margin-top:15px;">
