@@ -108,7 +108,8 @@ if(pg_num_rows($res) > 0){
 }
 
 echo json_encode([
-    'success' => true
+    'success' => true,
+    'DocNo' => $dt["RepairID"]
 ]);
 
 ?>
