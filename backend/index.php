@@ -6,6 +6,8 @@ header("Content-Type: application/json");
 require_once 'db.php';
 $data = [];
 // ทดสอบ query ง่าย ๆ
+$EmpName = $_GET["empname"];
+
 $qry = 'select concat(t5."firstName",\' \',t5."lastName") as fullnameit,t3."name" as dviname,t4."name",
 CASE WHEN t1."StatusWork" = 0 THEN \'รอ IT ตรวจสอบ\' 
 WHEN t1."StatusWork" = 1 THEN \'กำลังดำเนินการ\' 
@@ -17,10 +19,19 @@ left join "Master_Device_Type" t2 on t1."DeviceTypeID" = t2."id" and t2."StatusD
 left join "Division" t3 on t1."DviCode" = t3."code"
 left join "Department" t4 on t1."DptCode" = t4."code"
 left join "User" t5 on t1."user_id_IT" = t5."id"
-where t1."StatusDelete" = 0 ORDER BY t1."RepairID" DESC limit 15 offset 0';
+where t1."StatusDelete" = 0'; 
+
+if($EmpName != ""){
+  $qry .= ' AND "EmpName" = \'' . $EmpName . '\' ';
+}
+
+$qry .= ' ORDER BY t1."RepairID" DESC limit 15 offset 0';
 $result = pg_query($Con, $qry);
 
-$qryCountData = 'Select count("RepairID") as countdata from "rp_Repair_Notify" where "StatusDelete" = 0;';
+$qryCountData = 'Select count("RepairID") as countdata from "rp_Repair_Notify" where "StatusDelete" = 0';
+if($EmpName != ""){
+  $qryCountData .= ' AND "EmpName" = \'' . $EmpName . '\' ';
+}
 $res = pg_query($Con, $qryCountData);
 $dt = pg_fetch_assoc($res);
 $countData = $dt["countdata"];
