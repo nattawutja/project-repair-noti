@@ -2,7 +2,6 @@
 ob_clean(); // เคลียร์ output buffer ถ้ามีอะไรหลุดออกมาก่อน
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json");
 
 require_once 'db.php';
 
