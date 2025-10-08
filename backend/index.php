@@ -9,7 +9,7 @@ $data = [];
 $EmpName = $_GET["empname"];
 $Division = $_GET["divisionname"];
 
-if($Division == "ฝ่ายบริหาร" || $Division == "ฝ่ายเทคโนโลยีสารสนเทศ"){
+if($Division == "ฝ่ายบริหาร" || $Division == "ฝ่าย MIS"){
   $qry = 'select concat(t5."firstName",\' \',t5."lastName") as fullnameit,t3."name" as dviname,t4."name",
   CASE WHEN t1."StatusWork" = 0 THEN \'รอ IT ตรวจสอบ\' 
   WHEN t1."StatusWork" = 1 THEN \'กำลังดำเนินการ\' 
@@ -48,7 +48,7 @@ if($Division == "ฝ่ายบริหาร" || $Division == "ฝ่าย�
 
 $result = pg_query($Con, $qry);
 
-  if($Division == "ฝ่ายบริหาร" || $Division == "ฝ่ายเทคโนโลยีสารสนเทศ"){
+  if($Division == "ฝ่ายบริหาร" || $Division == "ฝ่าย MIS"){
     $qryCountData = 'Select count("RepairID") as countdata from "rp_Repair_Notify" where "StatusDelete" = 0';
   }else{
     $qryCountData = 'Select count("RepairID") as countdata from "rp_Repair_Notify" where "StatusDelete" = 0';
