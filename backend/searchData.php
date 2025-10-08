@@ -57,7 +57,7 @@ if (!empty($dptCode)) {
   $strWhere .= ' AND "DptCode"  Ilike \'%' . $dptCode . '%\' ';
 }
 if (!empty($dptName)) {
-  $strWhere .= ' AND "name"  Ilike \'%' . $dptName . '%\' ';
+  $strWhere .= ' AND t3."name"  Ilike \'%' . $dptName . '%\' ';
 }
 if (!empty($EmpName)) {
   $strWhere .= ' AND "EmpName"  Ilike \'%' . $EmpName . '%\' ';
