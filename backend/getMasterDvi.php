@@ -6,7 +6,7 @@ header("Content-Type: application/json");
 require 'db.php';
 $data = [];
 // ทดสอบ query ง่าย ๆ
-$qry = 'SELECT * FROM "Division" order by "id"';
+$qry = 'SELECT * FROM "Division" order by "name"';
 $result = pg_query($Con, $qry);
 if ($result) {
     while ($row = pg_fetch_assoc($result)) {
