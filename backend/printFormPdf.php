@@ -66,10 +66,10 @@ $html = '
     }
     @page {
       size: A5 portrait;
-      margin: 0;
+      margin: 7.5mm; /* ปลอดภัยกว่า 2.2mm */
     }
     body {
-      margin: 0; 
+      margin: 0;
       padding: 0;
       height: 210mm;
       font-family: "Sarabun", sans-serif;
@@ -214,10 +214,10 @@ $html = '
       ลงชื่อ_____________________<span style="text-decoration:underline">' . $dt["EmpName"] . '</span>____________________ผู้แจ้ง
     </div>
 
-    <div style="margin-top:5px;font-size:11px; font-weight:bold;">สำหรับฝ่าย MIS : <span style="text-decoration:underline;"></span>____________________________________________________________________________________________________
+    <div style="margin-top:5px;font-size:11px; font-weight:bold;">สำหรับฝ่าย MIS : <span style="text-decoration:underline;"></span>__________________________________________________________________________________________________
     </div>
 
-    <div style="margin-top:5px;font-size:11px; font-weight:bold;">_________________________________________________________________________________________________________________________
+    <div style="margin-top:5px;font-size:11px; font-weight:bold;">_______________________________________________________________________________________________________________________
     </div>
 
     <div style="font-size:11px; font-weight:bold; margin-top: 10px; display: flex; justify-content: space-between;">
