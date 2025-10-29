@@ -35,10 +35,10 @@ if(pg_num_rows($resDocno) > 0){
     while($dtDocno = pg_fetch_assoc($resDocno)){
         $DocNoLates =  substr($dtDocno["RepairNo"], -5) + 1;
         $runningStr = str_pad($DocNoLates, 5, "0", STR_PAD_LEFT);
-        $RepairNo = "RP" . $substrYear . "/" . $runningStr;
+        $RepairNo = "RP" . $substrYear . $runningStr;
     }
 }else{
-    $RepairNo = "RP" . $substrYear . "/" . "00001";
+    $RepairNo = "RP" . $substrYear . "00001";
 }
 
 
