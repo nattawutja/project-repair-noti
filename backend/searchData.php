@@ -19,6 +19,10 @@ $DateNotiEnd = $_GET['tbDateNotiEndSearch'] ?? '';
 $EmpName = $_GET['tbEmpNameSearch'] ?? '';
 $dviCode = $_GET['tbDviNameSearch'] ?? '';
 
+$EmpNameData = $_GET['tbEmpName'] ?? '';
+$Empdivision = $_GET['tbEmpDivision'] ?? '';
+
+
 $page = isset($_GET['tbpage']) ? intval($_GET['tbpage']) : 0;
 $itemsPerPage = 15;
 $offset = $page * $itemsPerPage;
@@ -32,12 +36,16 @@ WHEN t1."StatusWork" = 2 THEN \'ส่งซ่อม\'
 WHEN t1."StatusWork" = 3 THEN \'รออะไหล่ในการซ่อม\'
 WHEN t1."StatusWork" = 4 THEN \'รอผู้แจ้งตรวจสอบ\' 
 else \'จบงาน\' end as status, 
-CASE WHEN t1."SystemType" = \'P\' THEN \'P/C\' else \'AS/400\' end as systemname,t2."name_Device",to_char(t1."create_date",\'DD/MM/YYYY HH24:MI:SS\')as cvcreatedate,t1.*,t3."name" from "rp_Repair_Notify" t1
+CASE WHEN t1."SystemType" = \'P\' THEN \'P/C\' else \'AS/400\' end as systemname,t2."name_Device",to_char(t1."create_date",\'DD/MM/YYYY HH24:MI:SS\') as cvcreatedate,t1.*,t3."name" from "rp_Repair_Notify" t1
 left join "Master_Device_Type" t2 on t1."DeviceTypeID" = t2."id" and t2."StatusDelete" = 0
 left join "Department" t3 on t1."DptCode" = t3."code"
 left join "Division" t4 on t1."DviCode" = t4."code"
 left join "User" t5 on t1."user_id_IT" = t5."id"
 where 1=1 and t1."StatusDelete" = 0 ';
+
+if( $Empdivision != "ฝ่ายบริหาร" || $Empdivision != "ฝ่าย MIS"){
+  $qry .= ' AND t1."EmpName" = \'' . $EmpNameData . '\' ';
+}
 
 if (!empty($docNo)) {
   $strWhere .= ' AND "RepairNo"  Ilike \'%' . $docNo . '%\' ';
@@ -96,8 +104,17 @@ $countData = 0;
 $qryCountData = 'SELECT Count("RepairID") as countdata FROM "rp_Repair_Notify" t1
 left join "Department" t3 on t1."DptCode" = t3."code"
 left join "Division" t4 on t1."DviCode" = t4."code"
-WHERE 1=1 AND "StatusDelete" = 0 ' . $strWhere ;
-$resCountData = pg_query($Con, $qryCountData);
+WHERE 1=1 AND "StatusDelete" = 0 ';
+
+if( $Empdivision != "ฝ่ายบริหาร" || $Empdivision != "ฝ่าย MIS"){
+  $qryCountData .= ' AND t1."EmpName" = \'' . $EmpNameData . '\' ';
+}
+
+if( $Empdivision != "ฝ่ายบริหาร" || $Empdivision != "ฝ่าย MIS"){
+  $resCountData = pg_query($Con, $qryCountData);
+}else{
+  $resCountData = pg_query($Con, $qryCountData . $strWhere);
+}
 if(pg_num_rows($resCountData) > 0){
   $dtCountData = pg_fetch_assoc($resCountData);
   $countData = $dtCountData["countdata"];
