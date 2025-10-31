@@ -45,7 +45,7 @@ $check_monitor = ($dt["DeviceTypeID"] == 4) ? 'X' : '';
 $check_keyboard = ($dt["DeviceTypeID"] == 5) ? 'X' : '';
 $check_network = ($dt["DeviceTypeID"] == 6) ? 'X' : '';
 $check_other = ($dt["DeviceTypeID"] == 7) ? 'X' : '';
-$check_otherTool = ($dt["OtherTool"] != "") ? $dt["OtherTool"] : '________________________________________';
+$check_otherTool = ($dt["OtherTool"] != "") ? $dt["OtherTool"] : '______________________________________________________';
 
 
 $html = '
@@ -65,15 +65,12 @@ $html = '
       src: url("fonts/Sarabun-Bold.ttf") format("truetype");
     }
     @page {
-      size: A5 portrait;
-      margin: 7.5mm; /* ปลอดภัยกว่า 2.2mm */
+      size: A4 portrait;
     }
+
     body {
-      margin: 0;
-      padding: 0;
-      height: 210mm;
       font-family: "Sarabun", sans-serif;
-      font-weight: 400;
+      font-size: 11px;
     }
     .checkbox-label {
       margin-right: 15px;
@@ -92,38 +89,32 @@ $html = '
       font-weight: bold;
     }
 
-   
-
     </style>
   </head>
   <body>
-    <div style="font-size:11px; font-weight:bold; text-align: right; white-space: nowrap;">
-      เลขที่ <span style="text-decoration: underline;">' . $dt["RepairNo"] . '</span>
-    </div>
+    
 
     <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 5px;">
-      <div style="font-size: 15px; font-weight: bold; text-align: left;">
-        บริษัท โรงงานผลิตภัณฑ์อาหารไทย จำกัด
-      </div>
-    </div>
-     
-    <div style="display: flex; align-items: center; justify-content: center; margin-top: 5px;">
-      <div style="flex: 1; text-align: center; font-size: 17px; font-weight: bold;">
-        ใบแจ้งซ่อมเครื่องและอุปกรณ์คอมพิวเตอร์
+      <div style="font-size: 14px; font-weight: bold; text-align: left;">
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;บริษัท โรงงานผลิตภัณฑ์อาหารไทย จำกัด
       </div>
     </div>
     
+    <div style="display: inline-flex; align-items: center; justify-content: space-between;">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="text-align: end; font-size: 18px; font-weight: bold;">ใบแจ้งซ่อมเครื่องและอุปกรณ์คอมพิวเตอร์ </span>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="text-align: end; font-size: 12px; font-weight: bold;">เลขที่&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-size: 12px; font-weight: bold; text-decoration:underline">' . $dt["RepairNo"] . '</span> </span>
+    </div>
 
 
-    <div style="font-size:11px; font-weight:bold; display: flex; justify-content: space-between; align-items: center; font-size: 10px; margin-top: 10px; width: 100%;">
+    <div style="font-weight:bold; display: flex; justify-content: space-between; align-items: center; font-size: 10px; margin-top: 10px; width: 100%;">
 
       <div style="display: inline-flex; align-items: center;">
-        <span>ฝ่าย / แผนก </span>
-        <span style="text-decoration: underline; min-width: 100px;">' . $dt["name"] . '</span>
+        <span style="font-weight:bold; font-size:12px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ชื่อฝ่าย / แผนก &nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span style="font-weight:bold; font-size:12px; text-decoration: underline; min-width: 100px;">' . $dt["name"] . '</span>
       </div>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <div style="display: inline-flex; align-items: right;">
-        <label>วันที่  </label>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <div style="font-weight:bold; font-size:12px; display: inline-flex; align-items: right;">
+        <label>วันที่&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
         <label style="text-decoration:underline;"> ' . $date . '  </label>
         <label>/</label>
         <label style="text-decoration:underline;"> ' . $month . '  </label>
@@ -136,12 +127,12 @@ $html = '
 
     <div style="font-size:11px; font-weight:bold;  display: flex; justify-content: space-between; align-items: center; font-size: 10px; margin-top: 5px; width: 100%;">
 
-      <div style="display: inline-flex; align-items: center;">
-        <span>ชื่อ </span>
+      <div style="font-weight:bold; font-size:12px; display: inline-flex; align-items: center;">
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ชื่อ  &nbsp;&nbsp;</span>
         <span style="text-decoration: underline; min-width: 100px;">' . $dt["EmpName"] . '</span>
       </div>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <div style="display: inline-flex; align-items: right;">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <div style="font-weight:bold; font-size:12px; display: inline-flex; align-items: right;">
         <span>รหัสแผนก </span>
         <span style="text-decoration: underline; min-width: 60px;">' . $dt["DptCode"] . '</span>
       </div>
@@ -149,89 +140,98 @@ $html = '
     </div>
 
 
-      <div style="display: flex; justify-content: space-between; margin-top: 15px; font-size: 10px;">
-        <div style="flex: 1; display: inline-flex; font-size:11px; font-weight:bold;">
-          ประเภท&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
-        </div>
-        <div style="flex: 1; display: inline-flex; ">
-          <span class="checkbox-label" style="margin-left: 10px;"><span class="checkbox" style="font-size:20px;"> ' . $check_pc . ' </span>P/C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
-        </div>
-        <div style="flex: 1; display: inline-flex;">
-          <span class="checkbox-label" style="margin-left: 10px;"><span class="checkbox" style="font-size:20px;">' . $check_400 . ' </span>AS/400</span> 
-        </div>
+    <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 12px;">
+      <div style="flex: 1; display: inline-flex; font-size:12px; font-weight:bold;">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ประเภท&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     
       </div>
-  
-      <div style="display: flex; justify-content: space-between; margin-top: 15px; font-size: 10px;">
-        <div style="flex: 1; display: inline-flex; font-size:11px; font-weight:bold;">
-          ชนิดอุปกรณ์&nbsp;
-        </div>
-        <div style="flex: 1; display: inline-flex;">
-          <span class="checkbox-label" style="margin-left: 10px;"><span class="checkbox" style="font-size:20px;"> ' . $check_computer . ' </span>เครื่องคอมพิวเตอร์</span> 
-        </div>
-        <div style="flex: 1; display: inline-flex;">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="checkbox-label" style="margin-left: 10px;"><span class="checkbox" style="font-size:20px;"> ' . $check_Printer . ' </span>พริ้นเตอร์</span> 
-        </div>
-         <div style="flex: 1; display: inline-flex;">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="checkbox-label" style="margin-left: 10px;"><span class="checkbox" style="font-size:20px;"> ' . $check_mouse . ' </span>เม้าส์</span> 
-        </div>
+      <div style="flex: 1; display: inline-flex; ">
+        <span class="checkbox-label" style="margin-left: 10px;"><span class="checkbox" style="font-size:20px;"> ' . $check_pc . ' </span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight:bold;">P/C</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
       </div>
-
-      <div style="display: flex; justify-content: space-between; margin-top: 15px; font-size: 11px;">
-        <div style="flex: 1; display: inline-flex;">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </div>
-        <div style="flex: 1; display: inline-flex;">
-          <span class="checkbox-label" style="margin-left: 10px;"><span class="checkbox" style="font-size:20px;"> ' . $check_monitor . ' </span>จอภาพ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
-        </div>
-        <div style="flex: 1; display: inline-flex;">
-          <span class="checkbox-label" style="margin-left: 10px;"><span class="checkbox" style="font-size:20px;"> ' . $check_keyboard . ' </span>คีย์บอร์ด &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
-        </div>
-        <div style="flex: 1; display: inline-flex;">
-          <span class="checkbox-label" style="margin-left: 10px;"><span class="checkbox" style="font-size:20px;"> ' . $check_network . ' </span>เครือข่าย</span> 
-        </div>
+      <div style="flex: 1; display: inline-flex;">
+        <span class="checkbox-label" style="margin-left: 10px;"><span class="checkbox" style="font-size:20px;">' . $check_400 . ' </span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight:bold;">AS/400</span></span> 
       </div>
-
-      <div style="display: flex; justify-content: space-between; margin-top: 15px; font-size: 11px;">
-        <div style="flex: 1; display: inline-flex;">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </div>
-        <div style="flex: 1; display: inline-flex;">
-          &nbsp;&nbsp;&nbsp;<span class="checkbox-label" style="margin-left: 10px;"><span class="checkbox" style="font-size:20px;"> ' . $check_other . ' </span>อื่นๆ ' . $check_otherTool . ' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
-        </div>
-       
-      </div>
-
-      <div style="font-size:11px; font-weight:bold; display:flex; justify-content:between; margin-top:5px;">
-        <span>หมายเลขเครื่อง ________<span style="text-decoration:underline;">' . $dt["DeviceToolID"] . '</span>__________</span>
-        <span>รุ่น ___________<span style="text-decoration:underline;">' . $dt["Model"] . '</span>___________</span>
-        <span>รหัสทรัพย์สิน ____<span style="text-decoration:underline;">' . $dt["ToolAssetID"] . '</span>_________</span>
-      </div>
-      <div style="font-size:11px; font-weight:bold; margin-top:10px;">รายละเอียดอาการ <span style="text-decoration:underline;"> ' . $dt["description"] . '_______________________________________________________________</span>
-      </div>
-      <div style="font-size:11px; font-weight:bold;">________________________________________________________________________________________________________________________
-      </div>
-    <div style="font-size: 11px; text-align: right; width: 100%; margin-top:5px;">
-      ลงชื่อ_____________________<span style="text-decoration:underline">' . $dt["EmpName"] . '</span>____________________ผู้แจ้ง
     </div>
 
-    <div style="margin-top:5px;font-size:11px; font-weight:bold;">สำหรับฝ่าย MIS : <span style="text-decoration:underline;"></span>__________________________________________________________________________________________________
+    <div style="display: flex; justify-content: space-between; margin-top: 5px; font-size: 12px;">
+      <div style="flex: 1; display: inline-flex; font-size:11px; font-weight:bold;">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ชนิดอุปกรณ์&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div style="flex: 1; display: inline-flex;">
+        <span class="checkbox-label" style="margin-left: 10px;"><span class="checkbox" style="font-size:20px;"> ' . $check_computer . ' </span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight:bold;">เครื่องคอมพิวเตอร์</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+      </div>
+      <div style="flex: 1; display: inline-flex;">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="checkbox-label" style="margin-left: 10px;"><span class="checkbox" style="font-size:20px;"> ' . $check_Printer . ' </span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight:bold;">พริ้นเตอร์</span> </span> 
+      </div>
+      <div style="flex: 1; display: inline-flex;">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="checkbox-label" style="margin-left: 10px;"><span class="checkbox" style="font-size:20px;"> ' . $check_mouse . ' </span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight:bold;">เม้าส์</span></span>  
+      </div>
     </div>
 
-    <div style="margin-top:5px;font-size:11px; font-weight:bold;">_______________________________________________________________________________________________________________________
+    <div style="display: flex; justify-content: space-between; margin-top: 5px; font-size: 12px;">
+      <div style="flex: 1; display: inline-flex;">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div style="flex: 1; display: inline-flex;">
+        <span class="checkbox-label" style="margin-left: 10px;"><span class="checkbox" style="font-size:20px;"> ' . $check_monitor . ' </span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight:bold;">จอภาพ</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+      </div>
+      <div style="flex: 1; display: inline-flex;">
+        <span class="checkbox-label" style="margin-left: 10px;"><span class="checkbox" style="font-size:20px;"> ' . $check_keyboard . ' </span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight:bold;">คีย์บอร์ด</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+      </div>
+      <div style="flex: 1; display: inline-flex;">
+        <span class="checkbox-label" style="margin-left: 10px;"><span class="checkbox" style="font-size:20px;"> ' . $check_network . ' </span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight:bold">เครือข่าย</span></span> 
+      </div>
     </div>
 
-    <div style="font-size:11px; font-weight:bold; margin-top: 10px; display: flex; justify-content: space-between;">
-      <label>วันที่ตรวจรับการดำเนินการ  : ________/________/________ </label>
-      <label>&nbsp;&nbsp;&nbsp;&nbsp;วันที่ดำเนินการแล้วเสร็จ  : _______/_______/_______ </label>
+    <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 12px;">
+      <div style="flex: 1; display: inline-flex;">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div style="flex: 1; display: inline-flex;">
+        &nbsp;&nbsp;&nbsp;<span class="checkbox-label" style="margin-left: 10px;"><span class="checkbox" style="font-size:20px;"> ' . $check_other . ' </span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight:bold">อื่น ๆ</span> ' . $check_otherTool . ' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+      </div>
+    
     </div>
 
-    <div style="font-size:11px; font-weight:bold; margin-top: 10px; display: flex; justify-content: space-between;">
-      <label>ลงชื่อ_______________________________________ผู้ร้องขอ  </label>
-      <label>ลงชื่อ_______________________________________ผู้ดำเนินงาน</label>
+    <div style="font-size:12px; font-weight:bold; display:flex; justify-content:between; margin-top:5px;">
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;หมายเลขเครื่อง&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _____________<span style="text-decoration:underline;">' . $dt["DeviceToolID"] . '</span>_______________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;รุ่น ___________<span style="text-decoration:underline;">' . $dt["Model"] . '</span>___________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;รหัสทรัพย์สิน&nbsp;&nbsp;&nbsp;&nbsp;____<span style="text-decoration:underline;">' . $dt["ToolAssetID"] . '</span>__________________________</span>
+    </div>
+    <div style="font-size:12px; font-weight:bold; margin-top:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;รายละเอียดอาการ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="text-decoration:underline;"> ' . $dt["description"] . '_______________________________________________________________</span>
+    </div>
+    <div style="font-size:12px; font-weight:bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_________________________________________________________________________________________________________________________________________________________
+    </div>
+    <div style="font-size: 12px;  margin-top:5px;">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ลงชื่อ&nbsp;&nbsp;____________<span style="text-decoration:underline">' . $dt["EmpName"] . '</span>___________ผู้แจ้ง
     </div>
 
-    <div style="font-size:11px; font-weight:bold; margin-top:20px;">
-      <span style="margin-right: 10px;">FM-MS-XX-002/Revision No.00</span>
+    <div style="font-size: 12px;  margin-top:2px;">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
+    </div>
+
+    <div style="font-size:12px; font-weight:bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;สำหรับฝ่าย MIS : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="text-decoration:underline;"></span>______________________________________________________________________________________________________________________________
+    </div>
+
+    <div style="margin-top:5px;font-size:12px; font-weight:bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;________________________________________________________________________________________________________________________________________________________
+    </div>
+
+    <div style="font-size:12px; font-weight:bold; margin-top: 5px; display: flex; justify-content: space-between;">
+      <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;วันที่ตรวจรับการดำเนินการ  :&nbsp;&nbsp;______/______/______ </label>
+      <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;วันที่ดำเนินการแล้วเสร็จ  :&nbsp;&nbsp;_______/_______/_______ </label>
+    </div>
+
+    <div style="font-size:12px; font-weight:bold; margin-top: 5px; display: flex; justify-content: space-between;">
+      <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ลงชื่อ__________________________________________________ผู้ร้องขอ  </label>
+      <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ลงชื่อ________________________________________________ผู้ดำเนินงาน</label>
+    </div>
+
+    <div style="font-size: 12px;  margin-top:2px; display:flex">
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</label>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</label>
+    </div>
+
+    <div style="font-size:11px; margin-top:5px;">
+      <span style="margin-right: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FM-MS-XX-002/Revision No.00</span>
     </div>
 
   </body>
@@ -250,7 +250,7 @@ $dompdf = new Dompdf($options);
 $dompdf->set_option('isFontSubsettingEnabled', false);
 $dompdf->set_option('isHtml5ParserEnabled', true);
 $dompdf->loadHtml($html);
-$dompdf->setPaper('A5', 'portrait');
+$dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 $dompdf->stream("file.pdf", ["Attachment" => false]);
 
