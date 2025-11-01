@@ -22,7 +22,7 @@ $substrYear = substr($year,2);
 $month = $explodeDate[1];
 
 
-$RepairNoWhere .= "RP" . $substrYear . "/";
+$RepairNoWhere .= "RP" . $substrYear;
 
 $qryNo = 'SELECT Distinct("RepairNo") FROM "rp_Repair_Notify" 
 WHERE "RepairNo" LIKE \'' . $RepairNoWhere . '%\' and "StatusDelete" = 0
@@ -109,7 +109,8 @@ if(pg_num_rows($res) > 0){
 
 echo json_encode([
     'success' => true,
-    'DocNo' => $dt["RepairID"]
+    'DocNo' => $dt["RepairID"],
+    'qry' => $qry
 ]);
 
 ?>
